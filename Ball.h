@@ -9,8 +9,9 @@ using namespace sf;
 
 struct Ball {
     CircleShape shape;
-    float ballRadius = 10.f, ballSpeed = 8.f;
-
+    float ballRadius = 10.f, ballSpeed = 0;
+    //to check if the ball is out of the window
+    bool isLost = false;
     Vector2f speed{-ballSpeed, -ballSpeed};
     static constexpr int windowWidth{800}, windowHeight{600};
 
@@ -22,12 +23,16 @@ struct Ball {
     }
 
 
-    void setSpeed(float speed) {
+    void setBallSpeed(float speed) {
       ballSpeed = speed;
     }
 
-    float getSpeed(){
+    float getBallSpeed(){
       return ballSpeed;
+    }
+
+    bool getBallStatus(){
+      return isLost;
     }
 
 //is this a real life? no this is just an illusion of movement
@@ -50,7 +55,7 @@ struct Ball {
            speed.y = 0;
            speed.x = 0;
            ballSpeed = 0;
-           //endgame
+           isLost = true;
         }
     }
 

@@ -11,8 +11,8 @@ using namespace sf;
 struct Paddle : public Rectangle {
   Vector2f speed;
 
-  float paddleWidth{60.f}, paddleHeight{20.f}, paddleSpeed{6.f};
-  int windowWidth{800}, windowHeight{600};
+  float paddleWidth = 60.f, paddleHeight = 20.f, paddleSpeed = 0;
+      static constexpr int windowWidth{800}, windowHeight{600};
 
   Paddle(float mX, float mY) {
     shape.setPosition(mX,mY);
@@ -21,6 +21,9 @@ struct Paddle : public Rectangle {
     shape.setOrigin(paddleWidth / 2.f, paddleHeight / 2.f);
   }
 
+  void setPaddleSpeed(float speed) {
+    paddleSpeed = speed;
+  }
   //paddle left/right gameplay and check if the paddle inside the window
   void update() {
     shape.move(speed);

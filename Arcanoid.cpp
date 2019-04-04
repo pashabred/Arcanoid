@@ -26,13 +26,13 @@ void tryCollisionPB(Paddle& mPaddle, Ball& mBall) {
   if (!isIntersecting(mPaddle,mBall)) {
     return;
   }
-  mBall.speed.y = -mBall.getSpeed();
+  mBall.speed.y = -mBall.getBallSpeed();
 
   if (mBall.x() < mPaddle.x()) {
-    mBall.speed.x = -mBall.getSpeed();
+    mBall.speed.x = -mBall.getBallSpeed();
   }
   else {
-    mBall.speed.x = mBall.getSpeed();
+    mBall.speed.x = mBall.getBallSpeed();
   }
 }
 //collision between Ball and the Bricks
@@ -71,23 +71,23 @@ void tryCollisionBB(Brick& mBrick, Ball& mBall) {
 
   if(abs(minOverlapX) < abs(minOverlapY))
     if (ballFromLeft){
-      mBall.speed.x = -mBall.getSpeed();
+      mBall.speed.x = -mBall.getBallSpeed();
     }
     else {
-        mBall.speed.x = mBall.getSpeed();
+        mBall.speed.x = mBall.getBallSpeed();
     }
     else
       if (ballFromTop) {
-        mBall.speed.y = -mBall.getSpeed();
+        mBall.speed.y = -mBall.getBallSpeed();
       }
       else {
-        mBall.speed.y = mBall.getSpeed();
+        mBall.speed.y = mBall.getBallSpeed();
       }
 }
 
 int main() {
 
-    Ball ball {windowWidth / 2, windowHeight - 50};
+    Ball ball {windowWidth / 2, windowHeight - 70};
     Paddle paddle {windowWidth / 2, windowHeight - 50};
     Brick endGameBrick {windowWidth / 2, windowHeight / 2};
     vector<Brick> bricks;
@@ -104,8 +104,14 @@ int main() {
 
     while(true) {
         window.clear(Color::Black);
+
+        //start game with giving ball and paddle life
+        if (Keyboard::isKeyPressed(Keyboard::Space)){
+          ball.setBallSpeed(8.f);
+          paddle.setPaddleSpeed(8.f);
+        }
         //game over
-        if (ball.getSpeed() == 0) {
+        if (ball.getBallStatus()) {
           window.draw(endGameBrick.shape);
           //break;
         }
