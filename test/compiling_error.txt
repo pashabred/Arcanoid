@@ -1,0 +1,4 @@
+/home/pashabred/OOP/Arkanoid/test/test.cpp: In function ‘int main(int, const char**)’:
+/home/pashabred/OOP/Arkanoid/test/test.cpp:15:15: error: expected primary-expression before ‘.’ token
+   cout << Ball.ballSpeed;
+               ^

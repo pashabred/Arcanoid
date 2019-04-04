@@ -1,0 +1,4 @@
+/home/pashabred/OOP/Arkanoid/Arcanoid.cpp: In function ‘int main()’:
+/home/pashabred/OOP/Arkanoid/Arcanoid.cpp:108:18: error: invalid use of member function ‘float Ball::getSpeed()’ (did you forget the ‘()’ ?)
+         if (ball.getSpeed == 0) {
+             ~~~~~^~~~~~~~
