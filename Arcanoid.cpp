@@ -8,8 +8,6 @@ using namespace std;
 using namespace sf;
 
 constexpr int windowWidth{800}, windowHeight{600};
-
-
 float blockWidth = 60.f, blockHeight = 20.f;
 constexpr int countBlocksX{11}, countBlocksY{4};
 
@@ -91,6 +89,20 @@ int main() {
     Paddle paddle {windowWidth / 2, windowHeight - 50};
     Brick endGameBrick {windowWidth / 2, windowHeight / 2};
     vector<Brick> bricks;
+
+    Font font;
+    if (!font.loadFromFile("fonts/AllerDisplay.ttf")) {
+      cout << "Shiit!";
+    }
+
+    Text text;
+
+    text.setString("Press space to start the game");
+    text.setFont(font);
+    text.setCharacterSize(24);
+    text.setFillColor(Color::Yellow);
+    text.setPosition(250, windowHeight / 2);
+
     //creating the grid of blocks
     for (int iX=0;iX<countBlocksX;iX++) {
       for (int iY=0;iY<countBlocksY;iY++) {
@@ -102,22 +114,23 @@ int main() {
     window.setFramerateLimit(60);
 
 
-    while(true) {
+    while(window.isOpen()) {
         window.clear(Color::Black);
 
         //start game with giving ball and paddle life
         if (Keyboard::isKeyPressed(Keyboard::Space)){
           ball.setBallSpeed(8.f);
+          text.setFillColor(Color::Black);
           paddle.setPaddleSpeed(8.f);
         }
         //game over
         if (ball.getBallStatus()) {
-          window.draw(endGameBrick.shape);
-          //break;
-        }
-        //if esc is pressed break the loop
-        if (Keyboard::isKeyPressed(Keyboard::Key::Escape)) {
-          break;
+          text.setString("Dude! You loose. Press esc to leave");
+          text.setPosition(210, windowHeight / 2);
+          text.setFillColor(Color::Red);
+          if (Keyboard::isKeyPressed(Keyboard::Key::Escape)) {
+             break;
+          }
         }
 
         paddle.update();
@@ -137,10 +150,10 @@ int main() {
 
         window.draw(paddle.shape);
         window.draw(ball.shape);
+        window.draw(text);
         for(auto& brick : bricks) window.draw(brick.shape);
         window.display();
 
     }
-
     return 0;
 }

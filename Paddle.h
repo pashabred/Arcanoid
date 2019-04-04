@@ -12,7 +12,7 @@ struct Paddle : public Rectangle {
   Vector2f speed;
 
   float paddleWidth = 60.f, paddleHeight = 20.f, paddleSpeed = 0;
-      static constexpr int windowWidth{800}, windowHeight{600};
+  static constexpr int windowWidth{800}, windowHeight{600};
 
   Paddle(float mX, float mY) {
     shape.setPosition(mX,mY);
