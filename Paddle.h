@@ -11,13 +11,13 @@ using namespace sf;
 struct Paddle : public Rectangle {
   Vector2f speed;
 
-  float paddleWidth = 60.f, paddleHeight = 20.f, paddleSpeed = 0;
+  float paddleWidth = 80.f, paddleHeight = 20.f, paddleSpeed = 0;
   static constexpr int windowWidth{800}, windowHeight{600};
 
   Paddle(float mX, float mY) {
     shape.setPosition(mX,mY);
     shape.setSize({paddleWidth,paddleHeight});
-    shape.setFillColor(Color::Green);
+    shape.setFillColor(Color::Blue);
     shape.setOrigin(paddleWidth / 2.f, paddleHeight / 2.f);
   }
 

@@ -91,17 +91,19 @@ int main() {
     vector<Brick> bricks;
 
     Font font;
-    if (!font.loadFromFile("fonts/AllerDisplay.ttf")) {
+    if (!font.loadFromFile("src/fonts/AllerDisplay.ttf")) {
       cout << "Shiit!";
     }
 
     Text text;
-
     text.setString("Press space to start the game");
     text.setFont(font);
     text.setCharacterSize(24);
     text.setFillColor(Color::Yellow);
     text.setPosition(250, windowHeight / 2);
+
+
+    Event ev;
 
     //creating the grid of blocks
     for (int iX=0;iX<countBlocksX;iX++) {
@@ -116,6 +118,11 @@ int main() {
 
     while(window.isOpen()) {
         window.clear(Color::Black);
+        while (window.pollEvent(ev)) {
+          if (ev.type == Event::Closed){
+            window.close();
+          }
+        }
 
         //start game with giving ball and paddle life
         if (Keyboard::isKeyPressed(Keyboard::Space)){
